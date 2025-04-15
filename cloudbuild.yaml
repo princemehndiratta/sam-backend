@@ -1,0 +1,16 @@
+steps:
+  # Step 1: Use Maven to clean and package the application
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['clean', 'package', '-DskipTests=true']
+
+  # Step 2: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/sam-backend:latest', '.']
+
+  # Optional Step 3: Push the image to Google Container Registry (GCR)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/sam-backend:latest']
+
+# Define the image you want to push
+images:
+  - 'gcr.io/$PROJECT_ID/sam-backend:latest'
