@@ -1,6 +1,6 @@
 package com.app.sam_backend.config;
 
-import org.springdoc.api.OpenApiCustomiser;
+import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ public class SwaggerConfig {
     String domain;
 
     @Bean
-    public OpenApiCustomiser customiseOpenApi() {
+    public org.springdoc.core.customizers.OpenApiCustomiser customiseOpenApi() {
         return openApi -> openApi.getServers().add(new io.swagger.v3.oas.models.servers.Server()
                 .url(domain)
                 .description("Production Server"));
